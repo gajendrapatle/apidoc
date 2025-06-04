@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSE StARMF v2 API - Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <h2>APIs</h2>
+            <ul>
+                <li><a href="#login">Login</a></li>
+                <li><a href="#add-ucc">Add UCC</a></li>
+            </ul>
+        </aside>
+        <main class="content">
+            <section id="login">
+                <h2>Login API</h2>
+                <p><strong>Endpoint:</strong> <code>POST /api/login</code></p>
+                <h3>Request</h3>
+                <pre><code>curl -X POST https://api.example.com/api/login -H "Content-Type: application/json" -d '{"data":{"username":"your_username","password":"your_password"}}'</code></pre>
+                <h3>Response</h3>
+                <pre><code>{
+  "status": "success",
+  "data": {
+    "access_token": "eyJhbGciOi..."
+  },
+  "messages": []
+}</code></pre>
+                <h3>Description</h3>
+                <table>
+                    <tr><th>Field</th><th>Type</th><th>Description</th></tr>
+                    <tr><td>username</td><td>String</td><td>Username provided by StARMF system</td></tr>
+                    <tr><td>password</td><td>String</td><td>Password provided by StARMF system</td></tr>
+                </table>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
