@@ -2,42 +2,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BSE StARMF v2 API - Demo</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BSE StARMF v2 API Documentation</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.css" />
 </head>
 <body>
-    <div class="container">
-        <aside class="sidebar">
-            <h2>APIs</h2>
-            <ul>
-                <li><a href="#login">Login</a></li>
-                <li><a href="#add-ucc">Add UCC</a></li>
-            </ul>
-        </aside>
-        <main class="content">
-            <section id="login">
-                <h2>Login API</h2>
-                <p><strong>Endpoint:</strong> <code>POST /api/login</code></p>
-                <h3>Request</h3>
-                <pre><code>curl -X POST https://api.example.com/api/login -H "Content-Type: application/json" -d '{"data":{"username":"your_username","password":"your_password"}}'</code></pre>
-                <h3>Response</h3>
-                <pre><code>{
+  <header><h1>BSE StARMF v2 API Documentation</h1></header>
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search API..." />
+  </div>
+  <div class="container">
+    <aside class="sidebar">
+      <ul>
+        <li><a href="#overview">📘 Overview</a></li>
+        <li><a href="#login">🔐 Login</a></li>
+        <li><a href="#add-ucc">👤 Add UCC</a></li>
+        <li><a href="#order-new">📦 Order New</a></li>
+        <li><a href="#webhooks">📬 Webhooks</a></li>
+        <li><a href="#objects">📚 Objects</a></li>
+        <li><a href="#enums">🎛️ Enums</a></li>
+        <li><a href="#errors">❌ Error Codes</a></li>
+      </ul>
+    </aside>
+    <main class="content" id="apiContent">
+      <section id="overview">
+        <h2>📘 Overview</h2>
+        <p>This documentation provides detailed API references for the BSE StARMF v2 platform...</p>
+      </section>
+
+      <section id="login">
+        <h2>🔐 Login API</h2>
+        <p><strong>Endpoint:</strong> <code>POST /api/login</code></p>
+        <pre><code class="language-bash">curl -X POST https://api.example.com/api/login \
+-H "Content-Type: application/json" \
+-d '{"data":{"username":"your_username","password":"your_password"}}'</code></pre>
+        <pre><code class="language-json">{
   "status": "success",
   "data": {
     "access_token": "eyJhbGciOi..."
   },
   "messages": []
 }</code></pre>
-                <h3>Description</h3>
-                <table>
-                    <tr><th>Field</th><th>Type</th><th>Description</th></tr>
-                    <tr><td>username</td><td>String</td><td>Username provided by StARMF system</td></tr>
-                    <tr><td>password</td><td>String</td><td>Password provided by StARMF system</td></tr>
-                </table>
-            </section>
-        </main>
-    </div>
+        <table class="doc-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>username</td><td>String</td><td>Yes</td><td>API username</td></tr>
+            <tr><td>password</td><td>String</td><td>Yes</td><td>API password</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="add-ucc">
+        <h2>👤 Add UCC API</h2>
+        <p><strong>Endpoint:</strong> <code>POST /v2/add_ucc</code></p>
+        <pre><code class="language-bash">curl -X POST https://api.example.com/v2/add_ucc \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer &lt;token&gt;" \
+-d '{ "data": { "member": {}, "clientcode": "001", "holders": [] } }'</code></pre>
+        <table class="doc-table">
+          <thead><tr><th>Field</th><th>Type</th><th>Required</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td>member</td><td>Object</td><td>Yes</td><td>Member details</td></tr>
+            <tr><td>clientcode</td><td>String</td><td>Yes</td><td>Investor UCC</td></tr>
+            <tr><td>holders</td><td>Array</td><td>Yes</td><td>List of holders</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="order-new">
+        <h2>📦 Order New API</h2>
+        <p><strong>Endpoint:</strong> <code>POST /v2/order_new</code></p>
+        <pre><code class="language-bash">curl -X POST https://api.example.com/v2/order_new \
+-H "Authorization: Bearer &lt;token&gt;" \
+-d '{ "data": { "order_type": "BUY", "clientcode": "001" } }'</code></pre>
+      </section>
+
+      <section id="webhooks">
+        <h2>📬 Webhooks</h2>
+        <p>Structure and details of webhook calls from the BSE platform...</p>
+      </section>
+
+      <section id="objects">
+        <h2>📚 Objects</h2>
+        <p>List of reusable JSON object schemas like member, investor, bank_account, etc.</p>
+      </section>
+
+      <section id="enums">
+        <h2>🎛️ Enums</h2>
+        <p>All enum values used across the API - e.g. holding_nature, tax_status...</p>
+      </section>
+
+      <section id="errors">
+        <h2>❌ Error Codes</h2>
+        <p>Standardized error messages and codes.</p>
+        <table class="doc-table">
+          <thead><tr><th>Error Code</th><th>Message</th></tr></thead>
+          <tbody>
+            <tr><td>1020</td><td>Invalid UCC</td></tr>
+            <tr><td>1507</td><td>Record not found</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.js"></script>
+  <script>
+    document.getElementById('searchInput').addEventListener('keyup', function () {
+      const filter = this.value.toLowerCase();
+      document.querySelectorAll('main section').forEach(sec => {
+        sec.style.display = sec.innerText.toLowerCase().includes(filter) ? '' : 'none';
+      });
+    });
+  </script>
 </body>
 </html>
