@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wallet API Docs</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      display: flex;
+      overflow: hidden;
+      background: #f1f5f9;
+    }
+    aside {
+      width: 260px;
+      background-color: #1f2937;
+      color: white;
+      padding: 20px;
+      overflow-y: auto;
+      transition: width 0.3s ease;
+    }
+    aside.minimized {
+      width: 60px;
+      padding: 10px;
+    }
+    aside h1, aside input, aside ul, .folder-title {
+      transition: opacity 0.3s ease;
+    }
+    aside.minimized h1, aside.minimized input, aside.minimized ul, aside.minimized .folder-title {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #toggleSidebar {
+      background: #0d6efd;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      width: 100%;
+    }
+    #searchInput {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0;
+      font-size: 14px;
+      border: none;
+      border-radius: 4px;
+    }
+    .folder-title {
+      font-weight: bold;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    .folder ul {
+      list-style: none;
+      padding-left: 15px;
+    }
+    .folder ul li {
+      cursor: pointer;
+      padding: 5px 0;
+    }
+    .folder ul li:hover {
+      text-decoration: underline;
+    }
+    main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    header {
+      background: white;
+      padding: 10px 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .main-content {
+      display: flex;
+      flex-grow: 1;
+      overflow: hidden;
+    }
+    .intro-content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background: #fff;
+    }
+    .right-toggle-panel {
+      width: 360px;
+      border-left: 1px solid #ccc;
+      background: #fff;
+      padding: 15px;
+      overflow-y: auto;
+      transition: transform 0.3s ease;
+    }
+    .right-toggle-panel.minimized {
+      transform: translateX(100%);
+    }
+    .code-block {
+      background: #1e1e1e;
+      color: #f8f8f2;
+      padding: 10px;
+      border-radius: 6px;
+      font-family: monospace;
+      margin-bottom: 10px;
+      overflow-x: auto;
+    }
+    .toggleBtn {
+      background: #0d6efd;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .toc {
+      position: sticky;
+      top: 0;
+      background: #f8f9fa;
+      padding: 10px;
+      border-left: 4px solid #0d6efd;
+      margin-bottom: 20px;
+    }
+    .toc h4 { margin: 0 0 5px 0; }
+    .toc a {
+      display: block;
+      color: #0d6efd;
+      text-decoration: none;
+      font-size: 14px;
+      margin: 4px 0;
+    }
+    .toc a:hover { text-decoration: underline; }
+    h2, h3 { color: #1f2937; }
+    img {
+      margin-top: 10px;
+      max-width: 100%;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <aside id="sidebar">
+    <button id="toggleSidebar">☰</button>
+    <h1>Wallet API Docs</h1>
+    <input type="text" id="searchInput" placeholder="Search APIs 🔍"/>
+    <div class="folder">
+      <div class="folder-title">1.0 Wallet</div>
+      <ul>
+        <li onclick="showSection('wallet-intro')">📄 Wallet Intro</li>
+        <li onclick="showSection('wallet-create')">📄 Create Wallet</li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <header>
+      <div><strong>Express Checkout – Wallet</strong></div>
+      <button class="toggleBtn" onclick="toggleRightPanel()">Toggle API Panel</button>
+    </header>
+    <div class="main-content">
+      <div class="intro-content" id="wallet-intro" style="display:block;">
+        <div class="toc">
+          <h4>Quick Navigation</h4>
+          <a href="#wallet-about">About Wallet</a>
+          <a href="#wallet-flow">Wallet Flow Diagram</a>
+          <a href="#wallet-benefits">Benefits</a>
+        </div>
+        <section id="wallet-about">
+          <h2>About Wallet</h2>
+          <p>This section introduces the concept of wallet integration in the Express Checkout flow.</p>
+        </section>
+        <section id="wallet-flow">
+          <h2>Wallet Flow Diagram</h2>
+          <img src="https://dummyimage.com/600x250/ccc/000&text=Wallet+Flow+Diagram" alt="Flow" />
+        </section>
+        <section id="wallet-benefits">
+          <h2>Benefits of Wallet</h2>
+          <ul>
+            <li>Quick payments</li>
+            <li>Secure UPI linking</li>
+            <li>Popular providers supported</li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="intro-content" id="wallet-create" style="display:none;">
+        <h2>Create Wallet</h2>
+        <p>Use this API to create a wallet account for a user during checkout.</p>
+      </div>
+
+      <div class="right-toggle-panel" id="rightPanel">
+        <h3>🧾 CURL</h3>
+        <div class="code-block">curl -X POST https://api.example.com/wallet \<br>
+-H "Content-Type: application/json" \<br>
+-d '{ "wallet_type": "PAYTM", "customer_id": "CUST123", "mobile": "9876543210" }'</div>
+
+        <h3>📤 Request</h3>
+        <div class="code-block">{
+  "wallet_type": "PAYTM",
+  "customer_id": "CUST123",
+  "mobile": "9876543210"
+}</div>
+
+        <h3>📥 Response</h3>
+        <div class="code-block">{
+  "wallet_id": "wallet_123",
+  "status": "active"
+}</div>
+      </div>
+    </div>
+  </main>
+  <script>
+    function toggleRightPanel() {
+      document.getElementById("rightPanel").classList.toggle("minimized");
+    }
+    function showSection(id) {
+      document.querySelectorAll(".intro-content").forEach(div => div.style.display = "none");
+      document.getElementById(id).style.display = "block";
+    }
+    document.getElementById("toggleSidebar").addEventListener("click", () => {
+      document.getElementById("sidebar").classList.toggle("minimized");
+    });
+  </script>
+</body>
+</html>
